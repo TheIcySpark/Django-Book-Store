@@ -1,0 +1,49 @@
+{% extends 'book_store_app/client_base.html' %}
+
+{% block content %}
+    Book Coins: {{ book_coins }}
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Year</td>
+            <td>Edition</td>
+            <td>Editorial</td>
+            <td>City</td>
+            <td>Price</td>
+            <td>Qty</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            {% if book.stock >= 1 %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.year }}</td>
+                    <td>{{ book.edition }}</td>
+                    <td>{{ book.editorial }}</td>
+                    <td>{{ book.city }}</td>
+                    <td>{{ book.price }}</td>
+                    <form method="post" action="{% url 'book_store_app:client_purchases_history' %}">
+                        {% csrf_token %}
+                        <input name="book_id" type="hidden" value={{ book.id }}>
+                        <td> <input name="book_qty" type="number" value="1" min="1" max="{{ book.stock }}"> </td>
+                        <td><input type="submit" onclick="buy_book_clicked(event)" class="btn btn-primary" value="buy" ></td>
+                    </form>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+<script>
+    function buy_book_clicked(e) {
+        if(!confirm('Are you sure?')){
+            e.preventDefault()
+        }
+    }
+</script>
+{% endblock %}

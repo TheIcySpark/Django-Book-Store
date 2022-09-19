@@ -1,0 +1,35 @@
+{% extends 'book_store_app/client_base.html' %}
+
+{% block content %}
+    {% firstof status %}
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Year</td>
+            <td>Edition</td>
+            <td>Editorial</td>
+            <td>City</td>
+            <td>Price</td>
+            <td>Qty</td>
+            <td>Date</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for purchased_book in purchased_books %}
+            <tr>
+                <td>{{ purchased_book.book.title }}</td>
+                <td>{{ purchased_book.book.author }}</td>
+                <td>{{ purchased_book.book.year }}</td>
+                <td>{{ purchased_book.book.edition }}</td>
+                <td>{{ purchased_book.book.editorial }}</td>
+                <td>{{ purchased_book.book.city }}</td>
+                <td>{{ purchased_book.price }}</td>
+                <td>{{ purchased_book.qty }}</td>
+                <td>{{ purchased_book.date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

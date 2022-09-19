@@ -1,0 +1,10 @@
+{% extends 'book_store_app/client_base.html' %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <form action="{% url 'book_store_app:client_profile' %}" method="post">
+        {% csrf_token %}
+        {{ profile_form|crispy }}
+        <input type="submit" value="Submit" class="btn-primary btn">
+    </form>
+{% endblock %}
