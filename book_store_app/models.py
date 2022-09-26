@@ -14,6 +14,9 @@ class BookModel(models.Model):
     stock = models.IntegerField(default=1)
     price = models.FloatField(default=1)
 
+    def __str__(self):
+        return '%s' % self.title
+
 
 class UserPurchaseHistoryModel(models.Model):
     user = models.ForeignKey(
@@ -43,5 +46,8 @@ class ProfileDataModel(models.Model):
     city = models.CharField(max_length=200, blank=True, null=True, default=None)
     address = models.CharField(max_length=250, blank=True, null=True, default=None)
     zip_or_postal_code = models.IntegerField(blank=True, null=True, default=None)
-    phone = models.IntegerField(blank=True, null=True, default=None)
-    book_coins = models.FloatField(default=0, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True, default=None)
+    book_coins = models.FloatField(default=20, blank=True, null=True)
+
+    def __str__(self):
+        return '%s' % self.user.username
